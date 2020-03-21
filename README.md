@@ -31,14 +31,14 @@ $ docker run --rm -it \
 
 ### `POST /register`
 
-Example request:
+Example request (note that `username` must be an email address):
 
 ```sh
 $ curl --request POST \
   --url http://localhost:4000/api/v1/register \
   --header 'content-type: application/json' \
   --data '{
-	"username": "foo",
+	"username": "foo@example.com",
 	"password": "bar"
 }
 '
@@ -53,7 +53,7 @@ $ curl --request POST \
   --url http://localhost:4000/api/v1/authenticate \
   --header 'content-type: application/json' \
   --data '{
-	"username": "foo",
+	"username": "foo@example.com",
 	"password": "bar"
 }
 '
@@ -64,7 +64,7 @@ Example response:
 ```json
 {
   "_id": "5e755e343cc84882966cee09",
-  "username": "foo",
+  "username": "foo@example.com",
   "createdAt": "2020-03-21T00:22:12.523Z",
   "__v": 0,
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTc1NWUzNDNjYzg0ODgyOTY2Y2VlMDkiLCJpYXQiOjE1ODQ3NTAzNzJ9.vyjfLd-RwPRQYN7LtEWGWyGb6KcEFGfilbNic-X6Gvk"
@@ -87,7 +87,7 @@ Example response:
 
 ```json
 {
-  "username": "foo",
+  "username": "foo@example.com",
   "createdAt": "2020-03-21T00:22:12.523Z",
   "__v": 0,
   "id": "5e755e343cc84882966cee09"

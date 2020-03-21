@@ -1,10 +1,16 @@
 ﻿const express = require('express')
+const { check, validationResult } = require('express-validator')
 const router = express.Router()
 const userService = require('./user.service')
 
 // core routes
 router.post('/authenticate', authenticate)
-router.post('/register', register)
+router.post('/register',
+            [
+                // validate that the username is an email address
+                check('username').isEmail().withMessage('username must be an email address')
+            ],
+            register)
 router.get('/current', getCurrent)
 
 // other routes
@@ -22,6 +28,12 @@ function authenticate(req, res, next) {
 }
 
 function register(req, res, next) {
+    // Validate that the username is an email address
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() })
+    }
+
     userService.create(req.body)
         .then(() => res.json({}))
         .catch(err => next(err))
