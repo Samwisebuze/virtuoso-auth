@@ -12,6 +12,7 @@ router.post('/register',
             ],
             register)
 router.get('/current', getCurrent)
+router.get('/status', (req, res) => res.json({ status: 'ok' }))
 
 // other routes
 // router.get('/', getAll)

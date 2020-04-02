@@ -29,7 +29,15 @@ $ docker run --rm -it \
 
 ## Quick API Documentation
 
-### `POST /register`
+### `GET /api/v1/status`
+
+Status checker for the service:
+
+```sh
+$ curl -i http://localhost:4000/api/v1/status
+```
+
+### `POST /api/v1/register`
 
 Example request (note that `username` must be an email address):
 
@@ -44,7 +52,7 @@ $ curl --request POST \
 '
 ```
 
-### `POST /authenticate`
+### `POST /api/v1/authenticate`
 
 Example request:
 
@@ -92,6 +100,14 @@ Example response:
   "__v": 0,
   "id": "5e755e343cc84882966cee09"
 }
+```
+
+Accessing the API from the Kong API Gateway:
+
+```sh
+curl -i -X GET \
+  --url http://localhost:8000/api/v1/status \
+  --header 'Host: host.docker.internal:4000'
 ```
 
 ## License
